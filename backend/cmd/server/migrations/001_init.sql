@@ -1,7 +1,7 @@
 -- Idempotent schema. Safe to run on every startup.
 
 CREATE TABLE IF NOT EXISTS users (
-    id            BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id            BIGSERIAL PRIMARY KEY,
     username      TEXT        NOT NULL UNIQUE,
     email         TEXT        NOT NULL UNIQUE,
     password_hash TEXT        NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS treasures (
-    id          BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id          BIGSERIAL PRIMARY KEY,
     owner_id    BIGINT      NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     name        TEXT        NOT NULL,
     description TEXT        NOT NULL DEFAULT '',
